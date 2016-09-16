@@ -19,6 +19,11 @@ namespace SendEmail_MVC5.Controllers
             return View();
         }
 
+        public ActionResult BulkEmail()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
@@ -32,6 +37,21 @@ namespace SendEmail_MVC5.Controllers
             ModelState.AddModelError("", "Email successfully sent.");
             return View("Index");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public async Task<ActionResult> SendBulkEmail(BulkEmailViewModel model)
+        {
+            var emailTemplate = "WelcomeEmail";
+            var emailSubject = "Welcome to our site.";
+            var message = await EMailTemplate(emailTemplate);
+            message = message.Replace("@ViewBag.Name", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(model.Username));
+            await MessageServices.SendBulkEmailAsync(model.Email, emailSubject, message, model.Attachments);
+            ModelState.AddModelError("", "Email successfully sent.");
+            return View("Index");
+        }
+
 
         public static async Task<string> EMailTemplate(string template)
         {

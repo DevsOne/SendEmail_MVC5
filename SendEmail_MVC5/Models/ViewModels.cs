@@ -19,4 +19,18 @@ namespace SendEmail_MVC5.Models
         [Display(Name = "Attachment")]
         public List<HttpPostedFileBase> Attachments { get; set; }
     }
+
+    public class BulkEmailViewModel
+    {
+        [Required]
+        [Display(Name = "Username")]
+        public string Username { get; set; }
+
+        [Required]
+        [Display(Name = "Email")]
+        public string[] Email { get; set; }
+
+        [Display(Name = "Attachment")]
+        public List<HttpPostedFileBase> Attachments { get; set; }
+    }
 }
