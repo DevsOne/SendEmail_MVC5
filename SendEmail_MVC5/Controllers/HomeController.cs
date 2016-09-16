@@ -24,6 +24,7 @@ namespace SendEmail_MVC5.Controllers
             return View();
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
@@ -49,8 +50,9 @@ namespace SendEmail_MVC5.Controllers
             message = message.Replace("@ViewBag.Name", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(model.Username));
             await MessageServices.SendBulkEmailAsync(model.Email, emailSubject, message, model.Attachments);
             ModelState.AddModelError("", "Email successfully sent.");
-            return View("Index");
+            return View("BulkEmail");
         }
+
 
 
         public static async Task<string> EMailTemplate(string template)

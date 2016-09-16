@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
@@ -52,7 +51,6 @@ namespace SendEmail_MVC5.Models
             }
         }
 
-
         public async static Task SendBulkEmailAsync(string[] emails, string subject, string message, List<HttpPostedFileBase> attachments)
         {
             try
@@ -69,7 +67,7 @@ namespace SendEmail_MVC5.Models
                         myMessage.Attachments.Add(new Attachment(attachment.InputStream, fileName));
                     }
                 }
-                foreach(var email in emails)
+                foreach (var email in emails)
                 {
                     myMessage.To.Add(email);
                 }
@@ -95,5 +93,7 @@ namespace SendEmail_MVC5.Models
                 throw ex;
             }
         }
+
+
     }
 }

@@ -33,4 +33,5 @@ namespace SendEmail_MVC5.Models
         [Display(Name = "Attachment")]
         public List<HttpPostedFileBase> Attachments { get; set; }
     }
+
 }
